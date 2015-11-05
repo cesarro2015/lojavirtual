@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using portifolio.LojaVirtual.Web1.Models;
+using portifolio.LojaVirtual.Web1.HtmlHelpers;
 using System;
 using System.Web.Mvc;
 
@@ -22,10 +23,17 @@ namespace portifolio.LojaVirtual.UnitTest
 
 
             //act
-            //MvcHtmlString resultado = html.pageLinks(paginacao, PaginaURL);
+            MvcHtmlString resultado = html.PageLink(paginacao, PaginaURL);
 
             //assert
+            Assert.AreEqual(
 
+
+                @"<a class=""btn btn-defaoult"" href=""Pagina1"">1</a>"
+               + @"<a class=""btn btn-default btn-primary selected"" href""Pagina2"">2</a>"
+               + @"<a class=""btn btn-default"" href=""Pagina3""</a>", resultado.ToString()
+              
+               );
         }
     }
 }

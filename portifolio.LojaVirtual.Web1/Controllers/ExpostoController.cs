@@ -1,8 +1,6 @@
 ﻿using portifolio.LojaVirtual.Dominio.Repositorio;
-using System;
-using System.Collections.Generic;
+using portifolio.LojaVirtual.Web1.Models;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace portifolio.LojaVirtual.Web1.Controllers
@@ -14,6 +12,18 @@ namespace portifolio.LojaVirtual.Web1.Controllers
         public ActionResult ListaProdutos()
         {
             _repository = new ProdutoRepository();
+
+            ProdutosViewModel model = new ProdutosViewModel
+            {
+                Paginacao = new Paginacao
+                {
+                    PaginaAtual = pagina,
+                    IntensPorPagina = ProdutosPorPagina,
+                    IntensTotal = _repository.Produtos.Count()
+                }
+            }
+
+
             var produtos = _repository.Produtos.OrderBy(p => p.PodutoId).Take(5).Skip(2);
             return View();
         }
